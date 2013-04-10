@@ -1,5 +1,8 @@
 package com.avilysal.bouncer;
 
+import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Mouse;
+
 import com.avilysal.bouncer.screen.*;
 
 public class Bouncer {
@@ -46,6 +49,11 @@ public class Bouncer {
 		rend.start();
 		
 		if(render.initialize(DW,DH,fps,isResizable,vSync)){
+			try {
+				Mouse.create();
+			} catch (LWJGLException e) {
+				e.printStackTrace();
+			}
 			mainLoop();
 		}
 	}

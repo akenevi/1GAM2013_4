@@ -18,6 +18,11 @@ public class Reflector extends Entity{
 		if(direction2 > 3) direction2 = 0;
 	}
 	
+	public byte[] getDirections(){
+		byte[] temp = {direction1, direction2};
+		return temp;
+	}
+	
 	public void update(){
 		
 	}

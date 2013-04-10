@@ -14,6 +14,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.util.Timer;
 
 import com.avilysal.bouncer.PNGDecoder;
 
@@ -25,6 +26,7 @@ public class Renderer implements Runnable{
 	private String location = "res/BouncerSMap.png"; //location of spriteMap
 	private Sprite curSprite;
 	
+	public Timer clock;
 	@Override
 	public void run() {
 		
@@ -34,6 +36,7 @@ public class Renderer implements Runnable{
 		desirableFPS = fps;
 		initGL(DW,DH,isResizable,vSync);
 		initSprites();
+		clock = new Timer();
 		return true;
 	}
 	
@@ -106,6 +109,8 @@ public class Renderer implements Runnable{
 		spriteMap.put("reflector12", new Sprite("reflector12", 2*64, 2*64, 64, 64));
 		spriteMap.put("reflector23", new Sprite("reflector23", 3*64, 2*64, 64, 64));
 		spriteMap.put("reflector30", new Sprite("reflector30", 4*64, 2*64, 64, 64));
+		spriteMap.put("booster0", new Sprite("booster0", 1*64, 1*64, 64, 64));
+		spriteMap.put("booster1", new Sprite("booster1", 2*64, 1*64, 64, 64));
 	}
 	
 	private void initGL(int DW, int DH, boolean isResizable, boolean vSync){
@@ -154,6 +159,7 @@ public class Renderer implements Runnable{
 	//swap buffers, poll new input and finally autotune (Display.sync(fps)) Thread sleep to meet stated fps
 		Display.update();
 		Display.sync(desirableFPS);
+		Timer.tick();
 	}
 }
 

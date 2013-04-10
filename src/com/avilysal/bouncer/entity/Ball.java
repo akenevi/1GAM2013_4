@@ -41,6 +41,10 @@ public class Ball extends Entity{
 			speed += n/2;
 	}
 	
+	public void stop(){
+		speed = 0;
+	}
+	
 	public float[] getNextPos(){
 		float[] nextPos = new float[2];
 		if(direction == 0){nextPos[0] = (x + speed - speed/64); nextPos[1] = (y + speed/2 - speed/64);}
@@ -52,6 +56,13 @@ public class Ball extends Entity{
 	
 	public void setDirection(byte n){
 		direction = n;
+	}
+	
+	public byte getIncomingDirection(){
+		byte temp = (byte) (direction+2);
+		if(temp == 4) temp = 0;
+		if(temp == 5) temp = 1;
+		return temp;
 	}
 	
 	public void render(){
