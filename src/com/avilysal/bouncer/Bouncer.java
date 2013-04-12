@@ -6,7 +6,7 @@ import org.lwjgl.input.Mouse;
 import com.avilysal.bouncer.screen.*;
 
 public class Bouncer {
-	private static int DW = 800,  DH = 600, fps = 60;
+	private static int DW = 600,  DH = 400, fps = 60;
 	private static boolean isResizable = false, vSync = false;
 	
 	private static boolean running, exitGame;

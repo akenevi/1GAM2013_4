@@ -10,14 +10,6 @@ public class BoostTile extends Entity{
 		this.name = "booster";
 	}
 	
-	public void setDirection(byte d){
-		direction = d;
-	}
-	
-	public byte getDirection(){
-		return direction;
-	}
-	
 	public void update(){}
 	
 	public void render(){

@@ -1,43 +1,51 @@
 package com.avilysal.bouncer.entity;
 
 public class Reflector extends Entity{
-	private byte direction1, direction2;
 	
-	public Reflector(float x, float y, byte dir1, byte dir2){
+	public Reflector(float x, float y, byte dir){
 		this.x = x;
 		this.y = y;
-		direction1 = dir1;
-		direction2 = dir2;
+		direction = dir;
+		released = true;
 		this.name = "reflector";
 	}
 	
 	public void rotate(){
-		direction1 += 1;
-		direction2 += 1;
-		if(direction1 > 3) direction1 = 0;
-		if(direction2 > 3) direction2 = 0;
+		direction += 1;
+		if(direction == 4) direction = 0;
 	}
 	
-	public byte[] getDirections(){
-		byte[] temp = {direction1, direction2};
+	public byte getReflectionDirection(byte d){
+		byte temp = -1;
+		if(direction == 0){
+			if(d == 3) temp = 0;
+			if(d == 2) temp = 1;
+		} else if(direction == 1){
+			if(d == 0) temp = 1;
+			if(d == 3) temp = 2;
+		} else if(direction == 2){
+			if(d == 1) temp = 2;
+			if(d == 0) temp = 3;
+		} else if(direction == 3){
+			if(d == 2) temp = 3;
+			if(d == 1) temp = 0;
+		}
 		return temp;
 	}
 	
-	public void update(){
-		
-	}
+	public void update(){}
 	
 	public void render(){
-		if(direction1 == 0 && direction2 == 1){
+		if(direction == 0){
 			com.avilysal.bouncer.Bouncer.render.drawSprite("reflector01", x, y, 64, 64);
 		}
-		if(direction1 == 1 && direction2 == 2){
+		if(direction == 1){
 			com.avilysal.bouncer.Bouncer.render.drawSprite("reflector12", x, y, 64, 64);
 		}
-		if(direction1 == 2 && direction2 == 3){
+		if(direction == 2){
 			com.avilysal.bouncer.Bouncer.render.drawSprite("reflector23", x, y, 64, 64);
 		}
-		if(direction1 == 3 && direction2 == 0){
+		if(direction == 3){
 			com.avilysal.bouncer.Bouncer.render.drawSprite("reflector30", x, y, 64, 64);
 		}
 	}

@@ -1,16 +1,18 @@
 package com.avilysal.bouncer.entity;
 
 public class Ball extends Entity{
-	private byte direction = -1;
-	private float speed = 0;
+	private float speed;
 	
 	public Ball(float x, float y){
 		this.x = x;
 		this.y = y;
-		this.name = "ball";
+		released = true;
+		name = "ball";
+		speed = 0;
 	}
-	
+
 	public void update(){
+		System.out.println("direction:"+direction+", speed:"+speed);
 		move();
 	}
 	
@@ -29,16 +31,19 @@ public class Ball extends Entity{
 				x -= speed;
 				y += speed/2;
 			}
-			speed -= speed/64;
-		} else
-			speed = 0;
+			speed -= speed/128;
+		} else {
+			stop();
+		}
 	}
 	
 	public void incSpeed(float n){
 		if(speed == 0)
-			speed = n/2;
+			speed = n/4;
 		else
-			speed += n/2;
+			speed += n/4;
+		if(speed > 5f)
+			speed = 5f;
 	}
 	
 	public void stop(){
@@ -54,15 +59,16 @@ public class Ball extends Entity{
 		return nextPos;
 	}
 	
-	public void setDirection(byte n){
-		direction = n;
-	}
-	
 	public byte getIncomingDirection(){
 		byte temp = (byte) (direction+2);
 		if(temp == 4) temp = 0;
 		if(temp == 5) temp = 1;
 		return temp;
+	}
+	
+	@Override
+	public float getY(){
+		return (y-15);
 	}
 	
 	public void render(){
